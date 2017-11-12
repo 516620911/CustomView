@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.chenjunquan.myviewpager.MainActivity">
+
+    <RadioGroup
+        android:id="@+id/rg_main"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"></RadioGroup>
 
     <com.chenjunquan.myviewpager.MyViewPager
         android:id="@+id/myViewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.chenjunquan.myviewpager.MyViewPager>
+        android:layout_height="match_parent"
+        android:layout_below="@id/rg_main">
 
-</android.support.constraint.ConstraintLayout>
+    </com.chenjunquan.myviewpager.MyViewPager>
+
+</LinearLayout>
