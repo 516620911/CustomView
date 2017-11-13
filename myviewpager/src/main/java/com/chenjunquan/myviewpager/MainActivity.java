@@ -2,6 +2,7 @@ package com.chenjunquan.myviewpager;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
             //添加到MyViewPager
             myViewPager.addView(imageView);
         }
+        View view = View.inflate(getApplicationContext(), R.layout.test, null);
+        myViewPager.addView(view,2);
         //给ViewPager头部添加RadioGroup
         rg_main = findViewById(R.id.rg_main);
         for (int i = 0; i < myViewPager.getChildCount(); i++) {
