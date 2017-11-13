@@ -1,1 +1,1 @@
-include ':app', ':youkumenu', ':customAttrs', ':myviewpager'
+include ':app', ':youkumenu', ':customAttrs', ':myviewpager', ':EventTest2'

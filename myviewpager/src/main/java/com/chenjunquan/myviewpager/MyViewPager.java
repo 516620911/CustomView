@@ -19,13 +19,13 @@ import android.widget.Scroller;
  * 负责移动逻辑的这段代码执行的微小时间差*平均速度
  * 依托invalidate 会导致onDraw和computeScroll的执行这一特性实现
  * 三.这个ViewPager的触摸事件执行流程
-     * 1.手按下 按下这一事件传递 到onInterceptTouchEvent()方法用于判断是否拦截
-     * 2.然后传给mGestureDetector.onTouchEvent(event)方法 此类辅助判断手势类型(双击,滑动,长按)
-     * 3.switch语句执行后,手按下这一事件结束
-     * 4.接着手滑动 这一事件传递流程同上
-     * 5.当传递给手势识别器之后,识别器判断这两次事件为滑动事件
-     * 6.执行滑动事件方法 将ViewPager滑动
-     * (我们的ViewPager其实是一次性把几张图片合并成一个大图片 只是屏幕大小固定所以我们只能看到固定大小的位置)
+ * 1.手按下 按下这一事件传递 到onInterceptTouchEvent()方法用于判断是否拦截
+ * 2.然后传给mGestureDetector.onTouchEvent(event)方法 此类辅助判断手势类型(双击,滑动,长按)
+ * 3.switch语句执行后,手按下这一事件结束
+ * 4.接着手滑动 这一事件传递流程同上
+ * 5.当传递给手势识别器之后,识别器判断这两次事件为滑动事件
+ * 6.执行滑动事件方法 将ViewPager滑动
+ * (我们的ViewPager其实是一次性把几张图片合并成一个大图片 只是屏幕大小固定所以我们只能看到固定大小的位置)
  * Created by Administrator on 2017/11/12.
  */
 
@@ -140,8 +140,12 @@ public class MyViewPager extends ViewGroup {
                 float distanceX = Math.abs(endX - downX);
                 float distanceY = Math.abs(endY - downY);
                 //左右滑动
-                if (distanceX > distanceY && distanceX > 10)
+                if (distanceX > distanceY && distanceX > 10) {
                     result = true;
+                } else {
+                    //解决斜着移动会有一部分间隙的问题 强制移动回去
+                    scrollToPager(currentIndex);
+                }
                 /*downX=endX;
                 downY=endY;*/
                 break;
