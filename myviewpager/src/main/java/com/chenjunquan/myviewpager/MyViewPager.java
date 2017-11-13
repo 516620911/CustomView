@@ -203,7 +203,7 @@ public class MyViewPager extends ViewGroup {
         currentIndex = tempIndex;
         if (mOnPageChangeListener != null)
             mOnPageChangeListener.onChangeRadioButton(currentIndex);
-        //需要缓慢移动的距离(getScrollX() 就是当前view的左上角相对于母视图的左上角的X轴偏移量)
+        //需要缓慢移动的距离(getScrollX() 就是当前view的左上角相对于母视图的左上角的X轴偏移`量)
         int distance = currentIndex * getWidth() - getScrollX();
         //Android自带的Scroller可以实现渐变滑动
         //Math.abs(distance)可以解决多图片滑动最后一张图的缓冲效果
