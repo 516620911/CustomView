@@ -1,1 +1,1 @@
-include ':app', ':youkumenu', ':customAttrs', ':myviewpager', ':EventTest2', ':quickindex', ':slidingmenu'
+include ':app', ':youkumenu', ':customAttrs', ':myviewpager', ':EventTest2', ':quickindex', ':slidingmenu', ':waterripple'
