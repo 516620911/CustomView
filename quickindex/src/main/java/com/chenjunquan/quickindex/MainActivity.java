@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -48,20 +49,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //根据点击的索引和集合中的姓名首字母相比较调到指定位置
-    private void updateListView(String word) {
+    //改良后的索引 实现如果当前列表没有点击的首字母则递归查询下一个有内存的索引字母
+    private int updateListView(String word) {
         for (int i = 0; i < persons.size(); i++) {
             String listWord = persons.get(i).getPinyin().substring(0, 1);
             if (word.equals(listWord)) {
                 lv_main.setSelection(i);
-                return;
+                return i;
             }
+
         }
+        char c = (char) ((int) word.toCharArray()[0] + 1);
+        Log.i("String.valueOf(c)", String.valueOf(c));
+        return updateListView(String.valueOf(c));
     }
 
     private void updateWord(String word) {
         tv_word.setVisibility(View.VISIBLE);
         tv_word.setText(word);
         mHandler.removeCallbacksAndMessages(null);
+        //2s后消失
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -108,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             String pinyin = persons.get(position).getPinyin().substring(0, 1);
             viewHolder.tv_index.setText(pinyin);
             viewHolder.tv_name.setText(name);
-            //取得前一个位置对应的索引首字母  所以当前和前者相同则隐藏
+            //取得前一个位置对应的索引首字母  如果当前的和前者相同则隐藏当前的tv_index
             if (position == 0) {
                 viewHolder.tv_index.setVisibility(View.VISIBLE);
             } else {

@@ -2,6 +2,7 @@ package com.chenjunquan.myviewpager;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -167,7 +168,7 @@ public class MyViewPager extends ViewGroup {
                 startX = event.getX();
                 break;
             case MotionEvent.ACTION_MOVE:
-
+                Log.i("get",getScrollX()+"");
                 break;
             case MotionEvent.ACTION_UP:
                 //当前每次移动新的坐标
@@ -211,6 +212,7 @@ public class MyViewPager extends ViewGroup {
         //使用自定义的Scroller实现自动渐变滑动
         //mMyScroller.startScroll(getScrollX(), 0, distance, 0,500);
         //invalidate 会导致onDraw和computeScroll的执行，该方法是空的
+        Log.i(getScrollX()+"",distance+"");
         invalidate();
         //立即移动到指定位置
         //scrollTo(currentIndex * getWidth(), getScrollY());

@@ -60,6 +60,7 @@ public class IndexView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         for (int i = 0; i < words.length; i++) {
+            //如果是点击选中的索引字母改变其颜色
             if (touchIndex == i) {
                 mPaint.setColor(Color.RED);
             } else {
@@ -67,12 +68,18 @@ public class IndexView extends View {
             }
             String word = words[i];
             Rect rect = new Rect();
+            /*!!!返回能完整包裹这个字符串(用指定paint画笔来绘制的)的最小矩形!!!
+                   我们可以通过这个方法求某个字符串绘制所占的空间大小
+             */
             mPaint.getTextBounds(word, 0, 1, rect);
+            //通过上述矩形来确定绘制字符所需要长宽以确定绘制的位置
             int wordWidth = rect.width();
             int wordHeight = rect.height();
-
+            //每个索引字母的左下角X位置为
             float wordX = (itemWidth - wordWidth) / 2;
+            //Y位置为
             float wordY = itemHeight / 2 + wordHeight / 2 + itemHeight * i;
+            //此方法参照点为View左下角
             canvas.drawText(word, wordX, wordY, mPaint);
         }
     }
@@ -83,13 +90,16 @@ public class IndexView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
+            //按下和移动所处理的逻辑是相同的
             case MotionEvent.ACTION_DOWN:
 
             case MotionEvent.ACTION_MOVE:
+                //获取点击的索引
                 float y = event.getY();
                 int index = (int) (y / itemHeight);
                 if (index != touchIndex) {
                     touchIndex = index;
+                    //通过重绘来将点击的索引的颜色改变
                     invalidate();
                     if (mOnIndexChangeListener != null && touchIndex < words.length) {
                         mOnIndexChangeListener.OnIndexChange(words[touchIndex]);
